@@ -16,8 +16,8 @@ if (navigator.geolocation) {
     const api =`https://api.darksky.net/forecast/e39f589993bc108e1cdcb03fad49ac7f/${lat},${long}`;
     
     
-    fetch(api) 
-    .then(response => { 
+    fetch (api) 
+    .then (response => { 
         return response.json();
     }) 
    .then(data => { 
@@ -26,6 +26,8 @@ if (navigator.geolocation) {
        temperatureDegree.textContent = temperature;
        temperatureDescription.textContent = summary;
        locationTimezone.textContent = data.timezone;
+       // formula fo CELSIUS 
+       let celsius = (temperature - 32) * (5 / 9)
        // set icon 
        setIcons(icon, document.querySelector(".icon"));
 
@@ -34,8 +36,10 @@ if (navigator.geolocation) {
         temperatureSection.addEventListener('click', () => {
             if(temperatureSpan.textContent === "F") { 
                 temperatureSpan.textContent = "C";
+                temperatureDegree.textContent = Math.floor(celsius);
             } else { 
                 temperatureSpan.textContent = "F";
+                temperatureDegree.textContent = temperature;
             }
         });
  });
